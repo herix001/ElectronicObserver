@@ -152,6 +152,8 @@ namespace ItemUpgrade
             TypeGraph["対空機銃"] = "Equipment_AAGun";
             TypeGraph["高射装置"] = "Equipment_AADirector";
             TypeGraph["探照灯"] = "Equipment_Searchlight";
+            TypeGraph["艦上戦闘機"] = "Equipment_CarrierBasedFighter";
+            TypeGraph["艦上爆撃機"] = "Equipment_CarrierBasedBomber";
             TypeGraph["水上偵察機"] = "Equipment_Seaplane";
             TypeGraph["水上爆撃機"] = "Equipment_Seaplane";
 
@@ -306,6 +308,17 @@ namespace ItemUpgrade
             AddInformation(ItemType.大口径主砲, "試製51cm連装砲", new int[] { 1, 3 }, "武蔵改", RequirementList);
 
             RequirementList.New();
+            RequirementList.Initial.SetCondition(6, 8, "41cm連装砲", 3);
+            RequirementList.Steps.SetCondition(8, 12, "46cm三連装砲", 3);
+            RequirementList.Refresh.SetCondition(12, 20, "32号対水上電探", 2, "16inch三連装砲 Mk.7＋GFCS");
+            AddInformation(ItemType.大口径主砲, "16inch三連装砲 Mk.7", new int[] { 0, 1, 2, 3, 4, 5, 6 }, "Iowa", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(8, 12, "22号対水上電探", 2);
+            RequirementList.Steps.SetCondition(8, 16, "32号対水上電探", 2);
+            AddInformation(ItemType.大口径主砲, "16inch三連装砲 Mk.7＋GFCS", new int[] { 0, 4, 5, 6 }, "Iowa", RequirementList);
+
+            RequirementList.New();
             RequirementList.Initial.SetCondition(1, 2, "10cm連装高角砲", 1);
             RequirementList.Steps.SetCondition(1, 2, "10cm連装高角砲", 2);
             AddInformation(ItemType._副砲, "90mm単装高角砲", new int[] { 1, 2, 3, 4 }, "Littorio", RequirementList);
@@ -355,6 +368,12 @@ namespace ItemUpgrade
             RequirementList.Initial.SetCondition(3, 5, null, 0);
             RequirementList.Steps.SetCondition(3, 7, "61cm五連装(酸素)魚雷", 1);
             AddInformation(ItemType.魚雷, "61cm五連装(酸素)魚雷", new int[] { 3, 4 }, "島風", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(5, 6, "61cm四連装(酸素)魚雷", 2);
+            RequirementList.Steps.SetCondition(6, 12, "61cm五連装(酸素)魚雷", 1);
+            AddInformation(ItemType.魚雷, "試製61cm六連装(酸素)魚雷", new int[] { 3, 4, 5, 6 }, "初月", RequirementList);
+            AddInformation(ItemType.魚雷, "試製61cm六連装(酸素)魚雷", new int[] { 0, 6 }, "島風", RequirementList);
 
             RequirementList.New();
             RequirementList.Initial.SetCondition(2, 3, null, 0);
@@ -521,6 +540,84 @@ namespace ItemUpgrade
             RequirementList.Steps.SetCondition(3, 7, "探照灯", 1);
             AddInformation(ItemType.探照灯, "96式150cm探照灯", new int[] { 0, 1, 5, 6 }, "比叡", RequirementList);
             AddInformation(ItemType.探照灯, "96式150cm探照灯", new int[] { 2, 3, 4, 5 }, "霧島", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(1, 2, "九六式艦戦", 1);
+            RequirementList.Steps.SetCondition(1, 3, "7.7mm機銃", 1);
+            RequirementList.Refresh.SetCondition(2, 4, "九六式艦戦", 2, "零式艦戦21型+3");
+            AddInformation(ItemType.艦上戦闘機, "九六式艦戦", new int[] { 0, 1, 2, 3, 4, 5, 6 }, "鳳翔", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(2, 3, "零式艦戦21型", 1);
+            RequirementList.Steps.SetCondition(2, 4, "零式艦戦21型", 2);
+            RequirementList.Refresh.SetCondition(3, 5, "7.7mm機銃", 2, "零式艦戦32型+3");
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦21型", new int[] { 4, 5, 6 }, "赤城", RequirementList);
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦21型", new int[] { 0, 1, 2 }, "加賀", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(2, 3, "零式艦戦21型", 2);
+            RequirementList.Steps.SetCondition(2, 5, "零式艦戦21型", 3);
+            RequirementList.Refresh.SetCondition(3, 5, "7.7mm機銃", 3, "零式艦戦32型(熟練)+3");
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦21型(熟練)", new int[] { 4, 5, 6 }, "赤城", RequirementList);
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦21型(熟練)", new int[] { 0, 1, 2 }, "加賀", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(2, 3, "零式艦戦21型", 1);
+            RequirementList.Steps.SetCondition(3, 4, "零式艦戦21型", 2);
+            RequirementList.Refresh.SetCondition(4, 6, "零式艦戦32型", 1, "零式艦戦52型+3");
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦32型", new int[] { 0, 1 }, "赤城", RequirementList);
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦32型", new int[] { 3, 4 }, "加賀", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(2, 3, "零式艦戦21型", 2);
+            RequirementList.Steps.SetCondition(3, 5, "零式艦戦21型", 3);
+            RequirementList.Refresh.SetCondition(4, 6, "零式艦戦32型", 2, "零式艦戦52型(熟練)+3");
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦32型(熟練)", new int[] { 0, 1 }, "赤城", RequirementList);
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦32型(熟練)", new int[] { 3, 4 }, "加賀", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(3, 4, "零式艦戦52型", 1);
+            RequirementList.Steps.SetCondition(3, 5, "零式艦戦52型", 2);
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦52型", new int[] { 4, 5, 6 }, "翔鶴", RequirementList);
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦52型", new int[] { 0, 1, 3 }, "瑞鶴", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(3, 5, "零式艦戦52型", 2);
+            RequirementList.Steps.SetCondition(4, 6, "零式艦戦52型", 3);
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦52型(熟練)", new int[] { 4, 5, 6 }, "翔鶴", RequirementList);
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦52型(熟練)", new int[] { 0, 1, 3 }, "瑞鶴", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(3, 5, "零式艦戦52型", 2);
+            RequirementList.Steps.SetCondition(4, 6, "天山", 2);
+            AddInformation(ItemType.艦上戦闘機, "零戦52型丙(六〇一空)", new int[] { 0, 1, 2, 3, 4, 5, 6 }, "大鳳", RequirementList);
+            AddInformation(ItemType.艦上戦闘機, "零戦52型丙(六〇一空)", new int[] { 3, 4, 5, 6 }, "雲龍", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(3, 5, "零式艦戦52型", 2);
+            RequirementList.Steps.SetCondition(4, 6, "零式艦戦52型", 2);
+            AddInformation(ItemType.艦上戦闘機, "零戦52型丙(付岩井小隊)", new int[] { 2, 4 }, "瑞鶴", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(3, 5, "零式艦戦52型", 2);
+            RequirementList.Steps.SetCondition(4, 6, "零式艦戦52型", 2);
+            AddInformation(ItemType.艦上戦闘機, "零戦52型甲(付岩本小隊)", new int[] { 5, 6 }, "瑞鶴", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(3, 5, "零式艦戦52型", 2);
+            RequirementList.Steps.SetCondition(4, 6, "零式艦戦52型", 3);
+            AddInformation(ItemType.艦上戦闘機, "零式艦戦53型(岩本隊)", new int[] { 5, 6 }, "瑞鶴", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(3, 5, "零式艦戦52型", 2);
+            RequirementList.Steps.SetCondition(4, 6, "彗星", 2);
+            AddInformation(ItemType.艦上爆撃機, "零式艦戦62型(爆戦)", new int[] { 0, 5, 6 }, "隼鷹", RequirementList);
+            AddInformation(ItemType.艦上爆撃機, "零式艦戦62型(爆戦)", new int[] { 0, 1 }, "翔鶴", RequirementList);
+
+            RequirementList.New();
+            RequirementList.Initial.SetCondition(3, 5, "零式艦戦52型", 2);
+            RequirementList.Steps.SetCondition(4, 6, "彗星", 2);
+            AddInformation(ItemType.艦上爆撃機, "零戦62型(爆戦／岩井隊)", new int[] { 2, 4 }, "瑞鶴", RequirementList);
 
             RequirementList.New();
             RequirementList.Initial.SetCondition(2, 3, "零式水上偵察機", 1);
@@ -1128,7 +1225,7 @@ namespace ItemUpgrade
 
     public enum ItemType
     {
-        小口径主砲, _小口径主砲, 中口径主砲, 大口径主砲, 副砲, _副砲, 魚雷, 電探, ソナー, 爆雷, 対艦強化弾, 対空機銃, 高射装置, 探照灯, 水上偵察機, 水上爆撃機, 上陸用舟艇, 特型内火艇
+        小口径主砲, _小口径主砲, 中口径主砲, 大口径主砲, 副砲, _副砲, 魚雷, 電探, ソナー, 爆雷, 対艦強化弾, 対空機銃, 高射装置, 探照灯, 艦上戦闘機, 艦上爆撃機, 水上偵察機, 水上爆撃機, 上陸用舟艇, 特型内火艇
     }
 
     public class UpgradeRequirementList

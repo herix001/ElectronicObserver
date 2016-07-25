@@ -36,7 +36,7 @@ namespace RecordView
 
 		public override string Version
 		{
-			get { return "1.0.1.2"; }
+			get { return "1.0.1.3"; }
 		}
 
 		public override Form GetToolWindow()

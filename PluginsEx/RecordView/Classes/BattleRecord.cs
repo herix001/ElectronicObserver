@@ -606,42 +606,49 @@ namespace RecordView
                         }
                     }
 
-                    // 开幕反潜
-                    if (day.OpeningASW != null && day.OpeningASW.IsAvailable)
+                    try
                     {
-                        Record.ShellBattle1.IsAvailable |= 0x10000;
-                        var data = day.OpeningASW.ShellingData;
-                        int[] at_list = (int[])data.api_at_list;
-                        int[] at_type = (int[])data.api_at_type;
-                        int index = 0;
-                        for (int i = 1; i < at_list.Length; i++)
+                        // 开幕反潜
+                        if (day.OpeningASW != null && day.OpeningASW.IsAvailable)
                         {
-                            int from = at_list[i] - 1;
-                            int[] enemy_list = (int[])data.api_df_list[i];
-
-                            int[] equips = (int[])data.api_si_list[i];
-                            int[] flags = (int[])data.api_cl_list[i];
-                            int[] damages = (int[])data.api_damage[i];
-
-                            for (int j = 0; j < enemy_list.Length; j++)
+                            Record.ShellBattle1.IsAvailable |= 0x10000;
+                            var data = day.OpeningASW.ShellingData;
+                            int[] at_list = (int[])data.api_at_list;
+                            int[] at_type = (int[])data.api_at_type;
+                            int index = 0;
+                            for (int i = 1; i < at_list.Length; i++)
                             {
-                                int to = enemy_list[j] - 1;
+                                int from = at_list[i] - 1;
+                                int[] enemy_list = (int[])data.api_df_list[i];
 
-                                Record.ShellBattle1.Attacker[index] |= (from << 8);
-                                Record.ShellBattle1.Target[index] |= (to << 8);
-                                int flag = 0;
-                                if (flags[j] == 1)
-                                    flag |= 0x100;
-                                if (flags[j] == 2)
-                                    flag |= 0x200;
-                                //if (at_type[i] > 0)
-                                //    flag |= at_type[i] << 18;
-                                //0=通常, 1=レーザー攻撃, 2=連撃, 3=カットイン(主砲/副砲), 4=カットイン(主砲/電探), 5=カットイン(主砲/徹甲), 6=カットイン(主砲/主砲)
-                                Record.ShellBattle1.Attacker[index] |= ((damages[j] | flag) << 16);
-                                index++;
+                                int[] equips = (int[])data.api_si_list[i];
+                                int[] flags = (int[])data.api_cl_list[i];
+                                int[] damages = (int[])data.api_damage[i];
+
+                                for (int j = 0; j < enemy_list.Length; j++)
+                                {
+                                    int to = enemy_list[j] - 1;
+
+                                    Record.ShellBattle1.Attacker[index] |= (from << 8);
+                                    Record.ShellBattle1.Target[index] |= (to << 8);
+                                    int flag = 0;
+                                    if (flags[j] == 1)
+                                        flag |= 0x100;
+                                    if (flags[j] == 2)
+                                        flag |= 0x200;
+                                    //if (at_type[i] > 0)
+                                    //    flag |= at_type[i] << 18;
+                                    //0=通常, 1=レーザー攻撃, 2=連撃, 3=カットイン(主砲/副砲), 4=カットイン(主砲/電探), 5=カットイン(主砲/徹甲), 6=カットイン(主砲/主砲)
+                                    Record.ShellBattle1.Attacker[index] |= ((damages[j] | flag) << 16);
+                                    index++;
+                                }
+
                             }
-
                         }
+                    }
+                    catch
+                    {
+                        //未含有开幕反潜
                     }
 
                     // 闭幕雷击
